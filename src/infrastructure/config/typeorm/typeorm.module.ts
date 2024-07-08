@@ -1,32 +1,31 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { EnvironmentConfigService } from '../environment-config/environment-config.service';
+import * as dotenv from 'dotenv';
 
-export const getTypeOrmModuleOptions = (
-  config: EnvironmentConfigService,
-): TypeOrmModuleOptions =>
-  ({
+dotenv.config();
+
+export const getTypeOrmModuleOptions = (): TypeOrmModuleOptions => {
+  console.log(process.env.DB_NAME);
+  return {
     type: 'postgres',
-    host: config.getDatabaseHost(),
-    port: config.getDatabasePort(),
-    username: config.getDatabaseUser(),
-    password: config.getDatabasePassword(),
-    database: config.getDatabaseName(),
+    host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT),
+    username: process.env.DP_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
     entities: [__dirname + './../../**/*.entity{.ts,.js}'],
-    synchronize: config.getDatabaseSync(),
-    schema: process.env.DATABASE_SCHEMA,
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  }) as TypeOrmModuleOptions;
-
+    synchronize: !!process.env.DB_SYNCHRONIZE,
+    schema: process.env.DB_SCHEMA,
+    // ssl: {
+    //   rejectUnauthorized: false,
+    // },
+  } as TypeOrmModuleOptions;
+};
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
-      imports: [EnvironmentConfigService],
-      inject: [EnvironmentConfigService],
       useFactory: getTypeOrmModuleOptions,
     }),
   ],
 })
-export class TypeormModule {}
+export class TypeOrmConfigModule {}

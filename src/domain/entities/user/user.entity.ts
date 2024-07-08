@@ -4,7 +4,7 @@ export class User {
   constructor() {
     this.isActive = true;
   }
-  id: string;
+  id?: string;
   name: string;
   password: string;
   role: Role;
