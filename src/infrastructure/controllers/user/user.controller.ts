@@ -20,7 +20,6 @@ export class UserController {
   async create(@Res() response: Response, @Body() createUserDto: User) {
     try {
       const user = await this.userRepository.create(createUserDto);
-      console.log(user);
       return response.status(201).json(user);
     } catch (err) {
       return response.status(400).json(JSON.stringify(err));

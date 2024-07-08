@@ -1,4 +1,5 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+
 import {
   User as UserDomainEntity,
   UserRole,
@@ -9,13 +10,13 @@ export class User extends BaseEntity implements UserDomainEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column('varchar', { length: 255, nullable: true })
+  @Column('varchar', { length: 255, nullable: false })
   name: string;
 
-  @Column('varchar', { nullable: true })
-  password?: string;
+  @Column('varchar', { nullable: false, select: false })
+  password: string;
 
-  @Column('boolean', { nullable: false })
+  @Column('boolean', { nullable: false, default: true })
   isActive: boolean;
 
   @Column({

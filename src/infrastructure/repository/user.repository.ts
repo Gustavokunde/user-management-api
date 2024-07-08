@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { hashSync } from 'bcrypt';
 import { User } from 'src/domain/entities/user/user.entity';
 import { UserRepository } from 'src/domain/repositories/user.interface';
 import { Repository } from 'typeorm';
@@ -15,14 +16,17 @@ export class DatabaseUserRepository implements UserRepository {
   async create(createUserDto: User): Promise<User> {
     try {
       let user = new UserDB();
+      const password = hashSync(createUserDto.password, 10);
+
       user = Object.assign(user, {
         ...createUserDto,
-        isActive: true,
+        password,
       });
       await user.save();
-
+      delete user.password;
       return user;
     } catch (err) {
+      console.log(err);
       return err;
     }
   }

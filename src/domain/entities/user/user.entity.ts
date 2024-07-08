@@ -9,7 +9,7 @@ export class User {
   }
   id: string;
   name: string;
-  password?: string;
+  password: string;
   isActive: boolean;
   role: UserRole;
 }

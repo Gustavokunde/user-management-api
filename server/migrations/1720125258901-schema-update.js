@@ -18,12 +18,17 @@ class SchemaUpdate1720125258901 {
           {
             name: 'isActive',
             type: 'boolean',
-            isNullable: true,
+            isNullable: false,
+          },
+          {
+            name: 'role',
+            type: 'varchar',
+            isNullable: false,
           },
           {
             name: 'password',
             type: 'varchar',
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: 'created_at',
