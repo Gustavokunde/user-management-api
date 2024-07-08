@@ -12,8 +12,9 @@ import {
 import { Response } from 'express';
 import { User } from 'src/domain/entities/user/user.entity';
 import { AuthGuard } from 'src/domain/guards/auth.guard';
+import { Roles, RolesGuard } from 'src/domain/guards/roles.guard';
 import { DatabaseUserRepository } from 'src/infrastructure/repository/user/user.repository';
-
+@UseGuards(RolesGuard)
 @Controller('users')
 export class UserController {
   constructor(private readonly userRepository: DatabaseUserRepository) {}
@@ -29,6 +30,7 @@ export class UserController {
   }
 
   @UseGuards(AuthGuard)
+  @Roles(['admin'])
   @Get()
   async findAll(@Res() response: Response) {
     const users = await this.userRepository.findAll();
