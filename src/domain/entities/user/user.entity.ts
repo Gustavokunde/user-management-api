@@ -1,3 +1,8 @@
+export enum UserRole {
+  'ADMIN' = 'admin',
+  'COMMON' = 'common',
+}
+
 export class User {
   constructor() {
     this.isActive = true;
@@ -6,4 +11,5 @@ export class User {
   name: string;
   password?: string;
   isActive: boolean;
+  role: UserRole;
 }

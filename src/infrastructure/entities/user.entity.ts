@@ -1,5 +1,8 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { User as UserDomainEntity } from '../../domain/entities/user/user.entity';
+import {
+  User as UserDomainEntity,
+  UserRole,
+} from '../../domain/entities/user/user.entity';
 
 @Entity('users')
 export class User extends BaseEntity implements UserDomainEntity {
@@ -14,4 +17,11 @@ export class User extends BaseEntity implements UserDomainEntity {
 
   @Column('boolean', { nullable: false })
   isActive: boolean;
+
+  @Column({
+    type: 'enum',
+    enum: UserRole,
+    default: UserRole.COMMON,
+  })
+  role: UserRole;
 }
