@@ -7,9 +7,11 @@ import {
   Patch,
   Post,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { User } from 'src/domain/entities/user/user.entity';
+import { AuthGuard } from 'src/domain/guards/auth.guard';
 import { DatabaseUserRepository } from 'src/infrastructure/repository/user/user.repository';
 
 @Controller('users')
@@ -26,6 +28,7 @@ export class UserController {
     }
   }
 
+  @UseGuards(AuthGuard)
   @Get()
   async findAll(@Res() response: Response) {
     const users = await this.userRepository.findAll();

@@ -19,16 +19,21 @@ export class AuthRepository implements DomainAuthRepository {
       where: { username },
       select: {
         password: true,
+        id: true,
+        role: true,
       },
     });
-    console.log('user: ', user);
+
     const passwordMatch = compareSync(password, user.password);
 
     if (!passwordMatch) {
       throw new UnauthorizedException();
     }
 
-    const payload = { sub: user.id, username: user.username };
+    const payload = {
+      id: user.id,
+      role: user.role,
+    };
 
     return {
       token: await this.jwtService.signAsync(payload),
