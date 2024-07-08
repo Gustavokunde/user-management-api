@@ -17,13 +17,20 @@ export class UserController {
   constructor(private readonly userRepository: DatabaseUserRepository) {}
 
   @Post()
-  create(@Res() response: Response, @Body() createUserDto: User) {
-    return response.status(201).json(this.userRepository.create(createUserDto));
+  async create(@Res() response: Response, @Body() createUserDto: User) {
+    try {
+      const user = await this.userRepository.create(createUserDto);
+      console.log(user);
+      return response.status(201).json(user);
+    } catch (err) {
+      return response.status(400).json(JSON.stringify(err));
+    }
   }
 
   @Get()
-  findAll(@Res() response: Response) {
-    return response.status(200).json(this.userRepository.findAll());
+  async findAll(@Res() response: Response) {
+    const users = await this.userRepository.findAll();
+    return response.status(200).json(users);
   }
 
   @Get(':id')
