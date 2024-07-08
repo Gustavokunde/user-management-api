@@ -4,7 +4,7 @@ import { hashSync } from 'bcrypt';
 import { User } from 'src/domain/entities/user/user.entity';
 import { UserRepository } from 'src/domain/repositories/user.interface';
 import { Repository } from 'typeorm';
-import { User as UserDB } from '../../infrastructure/entities/user.entity';
+import { User as UserDB } from '../../entities/user.entity';
 
 @Injectable()
 export class DatabaseUserRepository implements UserRepository {

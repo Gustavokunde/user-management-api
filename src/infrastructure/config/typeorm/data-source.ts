@@ -10,7 +10,7 @@ export const dataSourceObject = {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   entities: [__dirname + './../../**/*.entity{.ts,.js}'],
-  migrations: ['server/migrations/**/*{.ts,.js}'],
+  migrations: ['server/migrations/**/*{.js}'],
   migrationsRun: true,
   migrationsTableName: 'migrations',
   cli: {

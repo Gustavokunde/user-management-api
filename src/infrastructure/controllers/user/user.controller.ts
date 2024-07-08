@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { User } from 'src/domain/entities/user/user.entity';
-import { DatabaseUserRepository } from 'src/infrastructure/repository/user.repository';
+import { DatabaseUserRepository } from 'src/infrastructure/repository/user/user.repository';
 
 @Controller('users')
 export class UserController {

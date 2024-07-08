@@ -13,6 +13,9 @@ export class User extends BaseEntity implements UserDomainEntity {
   @Column('varchar', { length: 255, nullable: false })
   name: string;
 
+  @Column('varchar', { length: 12, nullable: false, unique: true })
+  username: string;
+
   @Column('varchar', { nullable: false, select: false })
   password: string;
 
