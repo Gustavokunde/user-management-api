@@ -20,6 +20,8 @@ export class RolesGuard implements CanActivate {
     const token = this.extractTokenFromHeader(request);
     const roles = this.reflector.get(Roles, context.getHandler());
 
+    console.log('token does not exist');
+
     const { payload } = await this.jwtService.verifyAsync(token, {
       complete: true,
     });
@@ -34,10 +36,10 @@ export class RolesGuard implements CanActivate {
       }
 
       request['user'] = payload;
+      return true;
     } catch {
       throw new UnauthorizedException();
     }
-    return true;
   }
 
   private extractTokenFromHeader(request: Request): string | undefined {

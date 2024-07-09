@@ -1,4 +1,10 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  InternalServerErrorException,
+  Post,
+  Res,
+} from '@nestjs/common';
 import { Response } from 'express';
 import { AuthRepository as DataBaseAuthRepository } from '../../repository/auth/auth.repository';
 
@@ -18,7 +24,7 @@ export class AuthController {
       );
       return response.status(200).json(result);
     } catch (err) {
-      return response.status(400).json(err);
+      throw new InternalServerErrorException(err);
     }
   }
 }

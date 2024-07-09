@@ -24,10 +24,11 @@ export class AuthGuard implements CanActivate {
         complete: true,
       });
       request['user'] = payload;
+      return true;
     } catch {
+      console.log('token does not exist');
       throw new UnauthorizedException();
     }
-    return true;
   }
 
   private extractTokenFromHeader(request: Request): string | undefined {
