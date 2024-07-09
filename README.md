@@ -66,6 +66,7 @@ Even though I already know NestJS, I never worked with this framework before. Th
 
 To think in a project structure it requires time and a strong architecture knowledge to have a good structure that allows software growth but not also over engineer. In order to make it happen, I followed the NestJS best practices provided in the documentation and tried to start a clean architecture structure, always think if it was really need in the moment so I could keep it simple and concise.  
 
+Half part of commits were made in a bitbucket student account so I had to rebase and change it to to place it on github.
 
 ## Future improvements
 
